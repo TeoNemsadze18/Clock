@@ -10,11 +10,18 @@ import SwiftUI
 struct ContentView: View {
     @State var isDark = false
     var body: some View {
-        NavigationView {
-            Home(isDark: $isDark)
-                .navigationBarHidden(true)
-                .preferredColorScheme(isDark ? .dark : .light)
+        VStack {
+            NavigationView {
+                Home(isDark: $isDark)
+                    .navigationBarHidden(true)
+                    .preferredColorScheme(isDark ? .dark : .light)
+            }
+        LocationView()
+                .padding(.top)
+            Spacer()
         }
+        
+        .padding(.vertical)
     }
 }
 
@@ -35,7 +42,6 @@ struct Home: View {
                     .font(.title)
                     .fontWeight(.heavy)
                 Spacer(minLength: 0)
-                
                 Button(action: {isDark.toggle()}) {
                     Image(systemName: isDark ? "sun.min.fill" : "moon.fill")
                         .font(.system(size: 22))
@@ -48,6 +54,7 @@ struct Home: View {
             .padding()
             Spacer(minLength: 0)
             ZStack {
+                
                 Circle()
                     .fill(Color.black).opacity(0.1)
                 ForEach(0..<60, id: \.self) { i in
@@ -99,6 +106,18 @@ struct Home: View {
                 self.current_Time = Time(min: min, sec: sec, hour: hour)
             }
         }
+    }
+}
+struct LocationView: View {
+    var body: some View {
+        VStack {
+            Text("Georgia")
+                .font(.system(size: 50))
+            Text("11:00 PM")
+                .font(.title2)
+        }
+        .padding(.horizontal)
+        .padding(.vertical)
     }
 }
 
